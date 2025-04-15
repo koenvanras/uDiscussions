@@ -1,0 +1,40 @@
+name: Umbraco.Discussions Package Release
+
+env:
+  CONFIGURATION: 'Release'
+  OUTPUT: ./dist
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_version:
+        description: 'Package version'
+        required: true
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore ./Src/Umbraco.Discussions/Umbraco.Discussions.csproj
+      
+    - name: Build
+      run: dotnet build ./Src/Umbraco.Discussions/Umbraco.Discussions.csproj --configuration ${{ env.CONFIGURATION }} --no-restore
+      
+    - name: Create NuGet package
+      run: dotnet pack ./Src/Umbraco.Discussions/Umbraco.Discussions.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.OUTPUT }} /p:version=${{ github.event.inputs.package_version }}
+      
+    - name: Upload NuGet package artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: Umbraco.Discussions-${{ github.event.inputs.package_version }}
+        path: ${{ env.OUTPUT }}/**/*
