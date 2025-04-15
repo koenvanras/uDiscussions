@@ -30,9 +30,15 @@ jobs:
     - name: Build
       run: dotnet build ./Src/uDiscussions/uDiscussions.csproj --configuration ${{ env.CONFIGURATION }} --no-restore
       
-    - name: Create NuGet package
+    - name: Create NuGet package uDiscussions
       run: dotnet pack ./Src/uDiscussions/uDiscussions.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.OUTPUT }} /p:version=${{ github.event.inputs.package_version }}
+    
+    - name: Create NuGet package uDiscussions.Client
+      run: dotnet pack ./Src/uDiscussions.Client/uDiscussions.Client.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.OUTPUT }} /p:version=${{ github.event.inputs.package_version }}
       
+    - name: Create NuGet package uDiscussions.Core
+      run: dotnet pack ./Src/uDiscussions.Core/uDiscussions.Core.csproj -c ${{ env.CONFIGURATION }} --no-build -o ${{ env.OUTPUT }} /p:version=${{ github.event.inputs.package_version }}
+
     - name: Upload NuGet package artifact
       uses: actions/upload-artifact@v4.6.2
       with:
