@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-	<Product>Umbraco.Discussions</Product>
-	<PackageId>Umbraco.Discussions</PackageId>
-	<Title>Umbraco.Discussions</Title>
-	<Description>Umbraco.Discussions is a Umbraco package that adds discussions functionality to an Umbraco website.</Description>
+	<PackageId>Our.Umbraco.Discussions</PackageId>
+	<Title>Our.Umbraco.Discussions</Title>
+	<Description>A Umbraco package that adds discussions functionality to a Umbraco website that can be managed from the backoffice.</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<PackageTags>umbraco plugin package umbraco-marketplace</PackageTags>
-	<RootNamespace>Umbraco.Discussions</RootNamespace>
+	<RootNamespace>Our.Umbraco.Discussions</RootNamespace>
 	<PackageProjectUrl>https://github.com/koenvanras/Umbraco.Discussions</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/koenvanras/Umbraco.Discussions</RepositoryUrl>
 	<Version>1.0.0</Version>
@@ -17,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Umbraco.Discussions.Client\Umbraco.Discussions.Client.csproj" />
+    <ProjectReference Include="..\Our.Umbraco.Discussions.Client\Our.Umbraco.Discussions.Client.csproj" />
 
 	<None Include=".\..\..\README.md" Pack="true" PackagePath="\"></None>
   </ItemGroup>

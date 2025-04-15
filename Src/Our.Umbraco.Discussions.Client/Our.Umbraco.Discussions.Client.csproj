@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Umbraco.Discussions.Core\Umbraco.Discussions.Core.csproj" />
+    <ProjectReference Include="..\Our.Umbraco.Discussions.Core\Our.Umbraco.Discussions.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="assets\src\api\core\" />
-  </ItemGroup>
-	
 </Project>
