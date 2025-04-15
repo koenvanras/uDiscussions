@@ -1,4 +1,4 @@
-name: uDiscussions Release - ${{ github.event.inputs.package_version }}
+name: uDiscussions Release
 
 env:
   CONFIGURATION: 'Release'
