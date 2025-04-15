@@ -1,2 +1,2 @@
-# Umbraco.Comments
+# uDiscussions
 Umbraco package with comment functionality

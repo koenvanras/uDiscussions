@@ -1,0 +1,13 @@
+{
+    "$schema": "../umbraco-package-schema.json",
+    "name": "uDiscussions",
+    "version": "1.0.0-beta.1",
+    "extensions": [
+        {
+            "type": "entryPoint",
+            "alias": "uDiscussions.EntryPoint",
+            "name": "udiscussions.entrypoint",
+            "js": "/App_Plugins/uDiscussions/assets.js"
+        }
+    ]
+}
