@@ -1,5 +1,5 @@
 
-﻿import { UmbControllerBase } from "@umbraco-cms/backoffice/class-api";
+import { UmbControllerBase } from "@umbraco-cms/backoffice/class-api";
 import { UmbControllerHost } from "@umbraco-cms/backoffice/controller-api";
 import { UmbContextToken } from "@umbraco-cms/backoffice/context-api";
 import { UmbArrayState } from "@umbraco-cms/backoffice/observable-api";

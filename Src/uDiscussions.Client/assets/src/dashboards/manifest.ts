@@ -1,6 +1,5 @@
 import type { ManifestDashboard } from '@umbraco-cms/backoffice/extension-registry';
 import { DISCUSSIONS_SECTION_ALIAS } from '../sections/manifest';
-
 import StatisticsDashboard from './statistics.element';
 
 export const STATISTICS_DASHBOARD_ALIAS = "uDiscussions.Dashboard.Statistics";

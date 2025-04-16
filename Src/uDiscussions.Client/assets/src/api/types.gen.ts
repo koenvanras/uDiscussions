@@ -12,6 +12,12 @@ export type CommentSchema = {
     replyTo?: (number) | null;
 };
 
+export type DocumentTypeSettingsSchema = {
+    id: number;
+    documentType: string;
+    commentsEnabled: boolean;
+};
+
 export type EventMessageTypeModel = 'Default' | 'Info' | 'Error' | 'Success' | 'Warning';
 
 export const EventMessageTypeModel = {
@@ -105,3 +111,15 @@ export type GetCommentsTrashedCountResponse = (number);
 export type GetCommentsUnapprovedResponse = (Array<(CommentSchema)>);
 
 export type GetCommentsUnapprovedCountResponse = (number);
+
+export type PostDocumenttypesettingsData = {
+    requestBody?: (DocumentTypeSettingsSchema);
+};
+
+export type PostDocumenttypesettingsResponse = ((DocumentTypeSettingsSchema));
+
+export type GetDocumenttypesettingsByDocumentTypeData = {
+    documentType: string;
+};
+
+export type GetDocumenttypesettingsByDocumentTypeResponse = ((DocumentTypeSettingsSchema));

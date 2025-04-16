@@ -14,6 +14,7 @@ namespace uDiscussions.Core.Migrations
             To<DiscussionsSectionAdminUserGroupMigration>(DiscussionsSectionAdminUserGroupMigration.MigrationStepAlias);
             To<CommentsTableMigration>(CommentsTableMigration.MigrationStepAlias);
             To<LikesTableMigration>(LikesTableMigration.MigrationStepAlias);
+            To<DocumentTypeSettingsTableMigration>(DocumentTypeSettingsTableMigration.MigrationStepAlias);
         }
     }
 }

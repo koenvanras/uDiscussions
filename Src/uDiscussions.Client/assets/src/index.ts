@@ -4,6 +4,7 @@ import { manifests as sectionsManifest } from './sections/manifest';
 import { manifests as sidebarsManifest } from './sidebars/manifest';
 import { manifests as workspacesManifest } from './workspaces/manifest';
 import { manifests as contextsManifest } from './contexts/manifest';
+import { manifests as conditionsManifest } from './conditions/manifest';
 
 import { UMB_AUTH_CONTEXT } from '@umbraco-cms/backoffice/auth';
 import { OpenAPI } from './api/index.ts';
@@ -15,7 +16,8 @@ export const onInit: UmbEntryPointOnInit = (_host, extensionRegistry) => {
         ...sectionsManifest,
         ...dashboardsManifest,
         ...sidebarsManifest,
-        ...workspacesManifest
+        ...workspacesManifest,
+        ...conditionsManifest
     ]);
 
     _host.consumeContext(UMB_AUTH_CONTEXT, (_auth) => {

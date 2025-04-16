@@ -4,7 +4,7 @@
     "version": "1.0.0-beta.1",
     "extensions": [
         {
-            "type": "entryPoint",
+            "type": "backofficeEntryPoint",
             "alias": "uDiscussions.EntryPoint",
             "name": "udiscussions.entrypoint",
             "js": "/App_Plugins/uDiscussions/assets.js"

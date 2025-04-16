@@ -11,7 +11,7 @@ export interface ICommentsDataSource {
     approveComment(id: number) : Promise<UmbDataSourceResponse<boolean>>;
     trashComment(id: number) : Promise<UmbDataSourceResponse<boolean>>;
     restoreComment(id: number) : Promise<UmbDataSourceResponse<boolean>>;
-    deleteComment(id: number) : Promise<UmbDataSourceResponse<boolean>>
+    deleteComment(id: number): Promise<UmbDataSourceResponse<boolean>>;
 }
 
 export class CommentsDataSource implements ICommentsDataSource {

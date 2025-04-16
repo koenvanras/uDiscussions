@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { GetCommentByIdData, GetCommentByIdResponse, PostCommentsData, PostCommentsResponse, GetCommentsResponse, GetCommentsByContentkeyData, GetCommentsByContentkeyResponse, GetCommentsByContentkeyApprovedData, GetCommentsByContentkeyApprovedResponse, GetCommentsByContentkeyApprovedCountData, GetCommentsByContentkeyApprovedCountResponse, GetCommentsByContentkeyCountData, GetCommentsByContentkeyCountResponse, GetCommentsByContentkeyUnapprovedData, GetCommentsByContentkeyUnapprovedResponse, PatchCommentsByIdApproveData, PatchCommentsByIdApproveResponse, DeleteCommentsByIdDeleteData, DeleteCommentsByIdDeleteResponse, PatchCommentsByIdRestoreData, PatchCommentsByIdRestoreResponse, PatchCommentsByIdTrashData, PatchCommentsByIdTrashResponse, GetCommentsCountResponse, GetCommentsTrashedResponse, GetCommentsTrashedCountResponse, GetCommentsUnapprovedResponse, GetCommentsUnapprovedCountResponse } from './types.gen';
+import type { GetCommentByIdData, GetCommentByIdResponse, PostCommentsData, PostCommentsResponse, GetCommentsResponse, GetCommentsByContentkeyData, GetCommentsByContentkeyResponse, GetCommentsByContentkeyApprovedData, GetCommentsByContentkeyApprovedResponse, GetCommentsByContentkeyApprovedCountData, GetCommentsByContentkeyApprovedCountResponse, GetCommentsByContentkeyCountData, GetCommentsByContentkeyCountResponse, GetCommentsByContentkeyUnapprovedData, GetCommentsByContentkeyUnapprovedResponse, PatchCommentsByIdApproveData, PatchCommentsByIdApproveResponse, DeleteCommentsByIdDeleteData, DeleteCommentsByIdDeleteResponse, PatchCommentsByIdRestoreData, PatchCommentsByIdRestoreResponse, PatchCommentsByIdTrashData, PatchCommentsByIdTrashResponse, GetCommentsCountResponse, GetCommentsTrashedResponse, GetCommentsTrashedCountResponse, GetCommentsUnapprovedResponse, GetCommentsUnapprovedCountResponse, PostDocumenttypesettingsData, PostDocumenttypesettingsResponse, GetDocumenttypesettingsByDocumentTypeData, GetDocumenttypesettingsByDocumentTypeResponse } from './types.gen';
 
 export class CommmentsService {
     /**
@@ -294,6 +294,48 @@ export class CommmentsService {
             url: '/comments/unapproved/count',
             errors: {
                 401: 'The resource is protected and requires an authentication token'
+            }
+        });
+    }
+    
+}
+
+export class DocumentTypeSettingsService {
+    /**
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns unknown OK
+     * @throws ApiError
+     */
+    public static postDocumenttypesettings(data: PostDocumenttypesettingsData = {}): CancelablePromise<PostDocumenttypesettingsResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/documenttypesettings',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: 'Bad Request',
+                401: 'The resource is protected and requires an authentication token'
+            }
+        });
+    }
+    
+    /**
+     * @param data The data for the request.
+     * @param data.documentType
+     * @returns unknown OK
+     * @throws ApiError
+     */
+    public static getDocumenttypesettingsByDocumentType(data: GetDocumenttypesettingsByDocumentTypeData): CancelablePromise<GetDocumenttypesettingsByDocumentTypeResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/documenttypesettings/{documentType}',
+            path: {
+                documentType: data.documentType
+            },
+            errors: {
+                401: 'The resource is protected and requires an authentication token',
+                404: 'Not Found'
             }
         });
     }

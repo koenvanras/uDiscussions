@@ -40,6 +40,25 @@ export const CommentSchemaSchema = {
     additionalProperties: false
 } as const;
 
+export const DocumentTypeSettingsSchemaSchema = {
+    required: ['commentsEnabled', 'documentType', 'id'],
+    type: 'object',
+    properties: {
+        id: {
+            type: 'integer',
+            format: 'int32'
+        },
+        documentType: {
+            type: 'string',
+            format: 'uuid'
+        },
+        commentsEnabled: {
+            type: 'boolean'
+        }
+    },
+    additionalProperties: false
+} as const;
+
 export const EventMessageTypeModelSchema = {
     enum: ['Default', 'Info', 'Error', 'Success', 'Warning'],
     type: 'string'

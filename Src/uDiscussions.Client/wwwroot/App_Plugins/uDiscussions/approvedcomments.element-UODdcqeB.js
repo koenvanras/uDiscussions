@@ -1,6 +1,6 @@
 import { UmbElementMixin as g } from "@umbraco-cms/backoffice/element-api";
 import { LitElement as w, html as C, css as M, property as f, state as x, customElement as A } from "@umbraco-cms/backoffice/external/lit";
-import { C as O } from "./index-DDlCX0jV.js";
+import { C as O } from "./index-CXh1neh-.js";
 import { UMB_WORKSPACE_CONTEXT as E } from "@umbraco-cms/backoffice/workspace";
 import { UMB_MODAL_MANAGER_CONTEXT as b, UMB_CONFIRM_MODAL as k } from "@umbraco-cms/backoffice/modal";
 import { UMB_NOTIFICATION_CONTEXT as N } from "@umbraco-cms/backoffice/notification";
@@ -118,4 +118,4 @@ export {
   n as ApprovedCommentsWorkspaceElement,
   U as default
 };
-//# sourceMappingURL=approvedcomments.element-D-X28bSs.js.map
+//# sourceMappingURL=approvedcomments.element-UODdcqeB.js.map

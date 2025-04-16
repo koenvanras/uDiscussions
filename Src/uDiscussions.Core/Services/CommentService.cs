@@ -1,19 +1,24 @@
 ﻿using Microsoft.Extensions.Logging;
 using uDiscussions.Core.Models;
-using uDiscussions.Core.Services;
+using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Scoping;
+using static Umbraco.Cms.Core.Constants.HttpContext;
 
-namespace uDiscussions.Core.Services.Implementation
+namespace uDiscussions.Core.Services
 {
     public class CommentService : ICommentService
     {
         private readonly ILogger<CommentService> _logger;
         private readonly IScopeProvider _scopeProvider;
+        private readonly IUmbracoContextFactory _umbracoContextFactory;
+        private readonly IDocumentTypeSettingsService _documentTypeSettingsService;
 
-        public CommentService(ILogger<CommentService> logger, IScopeProvider scopeProvider)
+        public CommentService(ILogger<CommentService> logger, IScopeProvider scopeProvider, IUmbracoContextFactory umbracoContextFactory, IDocumentTypeSettingsService documentTypeSettingsService)
         {
             _logger = logger;
             _scopeProvider = scopeProvider;
+            _umbracoContextFactory = umbracoContextFactory;
+            _documentTypeSettingsService = documentTypeSettingsService;
         }
 
         /// <inheritdoc/>
@@ -131,19 +136,23 @@ namespace uDiscussions.Core.Services.Implementation
         /// <inheritdoc/>
         public bool CreateComment(CommentSchema item)
         {
-            try
+            if (CommentsEnabled(item.ContentKey))
             {
-                using (var scope = _scopeProvider.CreateScope())
+                try
                 {
-                    scope.Database.Insert(item);
-                    return scope.Complete();
+                    using (var scope = _scopeProvider.CreateScope())
+                    {
+                        scope.Database.Insert(item);
+                        return scope.Complete();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return default;
-            }
+
+            return default;
         }
 
         /// <inheritdoc/>
@@ -221,6 +230,31 @@ namespace uDiscussions.Core.Services.Implementation
             }
 
             return default;
+        }
+
+        private bool CommentsEnabled(Guid contentKey)
+        {
+            using (var umbracoContext = _umbracoContextFactory.EnsureUmbracoContext())
+            {
+                var content = umbracoContext.UmbracoContext.Content.GetById(contentKey);
+
+                if (content == null)
+                {
+                    return default;
+                }
+
+                var documentTypeSettings = _documentTypeSettingsService.GetSettings(content.ContentType.Key);
+
+                if (documentTypeSettings != null)
+                {
+                    if (!documentTypeSettings.CommentsEnabled)
+                    {
+                        return default;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
