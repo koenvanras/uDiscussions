@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using uDiscussions.Core.Models;
-using uDiscussions.Core.Services;
 using Umbraco.Cms.Infrastructure.Scoping;
 
-namespace uDiscussions.Core.Services.Implementation
+namespace uDiscussions.Core.Services
 {
     public class CommentService : ICommentService
     {

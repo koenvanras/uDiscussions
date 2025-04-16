@@ -1,21 +1,23 @@
-var he = (t) => {
+var ve = (t) => {
   throw TypeError(t);
 };
-var le = (t, e, s) => e.has(t) || he("Cannot " + s);
-var i = (t, e, s) => (le(t, e, "read from private field"), s ? s.call(t) : e.get(t)), T = (t, e, s) => e.has(t) ? he("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), b = (t, e, s, o) => (le(t, e, "write to private field"), o ? o.call(t, s) : e.set(t, s), s);
-import { UmbElementMixin as te } from "@umbraco-cms/backoffice/element-api";
-import { LitElement as se, html as P, css as ne, property as oe, state as B, customElement as re } from "@umbraco-cms/backoffice/external/lit";
-import { UmbControllerBase as ve } from "@umbraco-cms/backoffice/class-api";
-import { tryExecuteAndNotify as C } from "@umbraco-cms/backoffice/resources";
-import { UmbContextToken as Ue } from "@umbraco-cms/backoffice/context-api";
-import { UmbArrayState as F } from "@umbraco-cms/backoffice/observable-api";
-import { UMB_MODAL_MANAGER_CONTEXT as _e, UMB_CONFIRM_MODAL as H } from "@umbraco-cms/backoffice/modal";
-import { UMB_NOTIFICATION_CONTEXT as fe } from "@umbraco-cms/backoffice/notification";
-import { UMB_AUTH_CONTEXT as $e } from "@umbraco-cms/backoffice/auth";
-const ae = "uDiscussions.Section", Ie = [
+var _e = (t, e, s) => e.has(t) || ve("Cannot " + s);
+var a = (t, e, s) => (_e(t, e, "read from private field"), s ? s.call(t) : e.get(t)), y = (t, e, s) => e.has(t) ? ve("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), g = (t, e, s, o) => (_e(t, e, "write to private field"), o ? o.call(t, s) : e.set(t, s), s);
+import { UmbElementMixin as oe } from "@umbraco-cms/backoffice/element-api";
+import { LitElement as re, html as B, css as ae, property as ie, state as q, customElement as ce } from "@umbraco-cms/backoffice/external/lit";
+import { UmbControllerBase as me } from "@umbraco-cms/backoffice/class-api";
+import { tryExecuteAndNotify as l } from "@umbraco-cms/backoffice/resources";
+import { UmbContextToken as Me } from "@umbraco-cms/backoffice/context-api";
+import { UmbArrayState as X } from "@umbraco-cms/backoffice/observable-api";
+import { UMB_MODAL_MANAGER_CONTEXT as be, UMB_CONFIRM_MODAL as V } from "@umbraco-cms/backoffice/modal";
+import { UMB_NOTIFICATION_CONTEXT as Se } from "@umbraco-cms/backoffice/notification";
+import { UmbConditionBase as Pe } from "@umbraco-cms/backoffice/extension-registry";
+import { UMB_DOCUMENT_WORKSPACE_CONTEXT as Be } from "@umbraco-cms/backoffice/document";
+import { UMB_AUTH_CONTEXT as qe } from "@umbraco-cms/backoffice/auth";
+const de = "uDiscussions.Section", je = [
   {
     type: "section",
-    alias: ae,
+    alias: de,
     name: "Discussions Section",
     weight: 10,
     meta: {
@@ -23,15 +25,15 @@ const ae = "uDiscussions.Section", Ie = [
       pathname: "discussions"
     }
   }
-], Ne = [
-  ...Ie
+], Le = [
+  ...je
 ];
-class Ce extends Error {
+class Te extends Error {
   constructor(e, s, o) {
     super(o), this.name = "ApiError", this.url = s.url, this.status = s.status, this.statusText = s.statusText, this.body = s.body, this.request = e;
   }
 }
-class Me extends Error {
+class Ge extends Error {
   constructor(e) {
     super(e), this.name = "CancelError";
   }
@@ -39,7 +41,7 @@ class Me extends Error {
     return !0;
   }
 }
-class Pe {
+class He {
   constructor(e) {
     this._isResolved = !1, this._isRejected = !1, this._isCancelled = !1, this.cancelHandlers = [], this.promise = new Promise((s, o) => {
       this._resolve = s, this._reject = o;
@@ -47,16 +49,16 @@ class Pe {
         this._isResolved || this._isRejected || this._isCancelled || (this._isResolved = !0, this._resolve && this._resolve(c));
       }, r = (c) => {
         this._isResolved || this._isRejected || this._isCancelled || (this._isRejected = !0, this._reject && this._reject(c));
-      }, a = (c) => {
+      }, i = (c) => {
         this._isResolved || this._isRejected || this._isCancelled || this.cancelHandlers.push(c);
       };
-      return Object.defineProperty(a, "isResolved", {
+      return Object.defineProperty(i, "isResolved", {
         get: () => this._isResolved
-      }), Object.defineProperty(a, "isRejected", {
+      }), Object.defineProperty(i, "isRejected", {
         get: () => this._isRejected
-      }), Object.defineProperty(a, "isCancelled", {
+      }), Object.defineProperty(i, "isCancelled", {
         get: () => this._isCancelled
-      }), e(n, r, a);
+      }), e(n, r, i);
     });
   }
   get [Symbol.toStringTag]() {
@@ -81,14 +83,14 @@ class Pe {
           console.warn("Cancellation threw an error", e);
           return;
         }
-      this.cancelHandlers.length = 0, this._reject && this._reject(new Me("Request aborted"));
+      this.cancelHandlers.length = 0, this._reject && this._reject(new Ge("Request aborted"));
     }
   }
   get isCancelled() {
     return this._isCancelled;
   }
 }
-class ye {
+class ge {
   constructor() {
     this._fns = [];
   }
@@ -111,48 +113,48 @@ const m = {
   VERSION: "Latest",
   WITH_CREDENTIALS: !1,
   interceptors: {
-    request: new ye(),
-    response: new ye()
+    request: new ge(),
+    response: new ge()
   }
-}, q = (t) => typeof t == "string", K = (t) => q(t) && t !== "", ie = (t) => t instanceof Blob, ge = (t) => t instanceof FormData, Be = (t) => {
+}, j = (t) => typeof t == "string", Y = (t) => j(t) && t !== "", pe = (t) => t instanceof Blob, we = (t) => t instanceof FormData, Ve = (t) => {
   try {
     return btoa(t);
   } catch {
     return Buffer.from(t).toString("base64");
   }
-}, qe = (t) => {
+}, Fe = (t) => {
   const e = [], s = (n, r) => {
     e.push(`${encodeURIComponent(n)}=${encodeURIComponent(String(r))}`);
   }, o = (n, r) => {
-    r != null && (r instanceof Date ? s(n, r.toISOString()) : Array.isArray(r) ? r.forEach((a) => o(n, a)) : typeof r == "object" ? Object.entries(r).forEach(([a, c]) => o(`${n}[${a}]`, c)) : s(n, r));
+    r != null && (r instanceof Date ? s(n, r.toISOString()) : Array.isArray(r) ? r.forEach((i) => o(n, i)) : typeof r == "object" ? Object.entries(r).forEach(([i, c]) => o(`${n}[${i}]`, c)) : s(n, r));
   };
   return Object.entries(t).forEach(([n, r]) => o(n, r)), e.length ? `?${e.join("&")}` : "";
-}, We = (t, e) => {
-  const s = encodeURI, o = e.url.replace("{api-version}", t.VERSION).replace(/{(.*?)}/g, (r, a) => {
+}, Ke = (t, e) => {
+  const s = encodeURI, o = e.url.replace("{api-version}", t.VERSION).replace(/{(.*?)}/g, (r, i) => {
     var c;
-    return (c = e.path) != null && c.hasOwnProperty(a) ? s(String(e.path[a])) : r;
+    return (c = e.path) != null && c.hasOwnProperty(i) ? s(String(e.path[i])) : r;
   }), n = t.BASE + o;
-  return e.query ? n + qe(e.query) : n;
-}, je = (t) => {
+  return e.query ? n + Fe(e.query) : n;
+}, ze = (t) => {
   if (t.formData) {
     const e = new FormData(), s = (o, n) => {
-      q(n) || ie(n) ? e.append(o, n) : e.append(o, JSON.stringify(n));
+      j(n) || pe(n) ? e.append(o, n) : e.append(o, JSON.stringify(n));
     };
     return Object.entries(t.formData).filter(([, o]) => o != null).forEach(([o, n]) => {
       Array.isArray(n) ? n.forEach((r) => s(o, r)) : s(o, n);
     }), e;
   }
-}, j = async (t, e) => typeof e == "function" ? e(t) : e, Le = async (t, e) => {
+}, G = async (t, e) => typeof e == "function" ? e(t) : e, Xe = async (t, e) => {
   const [s, o, n, r] = await Promise.all([
     // @ts-ignore
-    j(e, t.TOKEN),
+    G(e, t.TOKEN),
     // @ts-ignore
-    j(e, t.USERNAME),
+    G(e, t.USERNAME),
     // @ts-ignore
-    j(e, t.PASSWORD),
+    G(e, t.PASSWORD),
     // @ts-ignore
-    j(e, t.HEADERS)
-  ]), a = Object.entries({
+    G(e, t.HEADERS)
+  ]), i = Object.entries({
     Accept: "application/json",
     ...r,
     ...e.headers
@@ -160,16 +162,16 @@ const m = {
     ...c,
     [f]: String(h)
   }), {});
-  if (K(s) && (a.Authorization = `Bearer ${s}`), K(o) && K(n)) {
-    const c = Be(`${o}:${n}`);
-    a.Authorization = `Basic ${c}`;
+  if (Y(s) && (i.Authorization = `Bearer ${s}`), Y(o) && Y(n)) {
+    const c = Ve(`${o}:${n}`);
+    i.Authorization = `Basic ${c}`;
   }
-  return e.body !== void 0 && (e.mediaType ? a["Content-Type"] = e.mediaType : ie(e.body) ? a["Content-Type"] = e.body.type || "application/octet-stream" : q(e.body) ? a["Content-Type"] = "text/plain" : ge(e.body) || (a["Content-Type"] = "application/json")), new Headers(a);
-}, He = (t) => {
+  return e.body !== void 0 && (e.mediaType ? i["Content-Type"] = e.mediaType : pe(e.body) ? i["Content-Type"] = e.body.type || "application/octet-stream" : j(e.body) ? i["Content-Type"] = "text/plain" : we(e.body) || (i["Content-Type"] = "application/json")), new Headers(i);
+}, Ye = (t) => {
   var e, s;
   if (t.body !== void 0)
-    return (e = t.mediaType) != null && e.includes("application/json") || (s = t.mediaType) != null && s.includes("+json") ? JSON.stringify(t.body) : q(t.body) || ie(t.body) || ge(t.body) ? t.body : JSON.stringify(t.body);
-}, Ge = async (t, e, s, o, n, r, a) => {
+    return (e = t.mediaType) != null && e.includes("application/json") || (s = t.mediaType) != null && s.includes("+json") ? JSON.stringify(t.body) : j(t.body) || pe(t.body) || we(t.body) ? t.body : JSON.stringify(t.body);
+}, Je = async (t, e, s, o, n, r, i) => {
   const c = new AbortController();
   let f = {
     headers: r,
@@ -180,14 +182,14 @@ const m = {
   t.WITH_CREDENTIALS && (f.credentials = t.CREDENTIALS);
   for (const h of t.interceptors.request._fns)
     f = await h(f);
-  return a(() => c.abort()), await fetch(s, f);
-}, Ve = (t, e) => {
+  return i(() => c.abort()), await fetch(s, f);
+}, Qe = (t, e) => {
   if (e) {
     const s = t.headers.get(e);
-    if (q(s))
+    if (j(s))
       return s;
   }
-}, Fe = async (t) => {
+}, Ze = async (t) => {
   if (t.status !== 204)
     try {
       const e = t.headers.get("Content-Type");
@@ -205,7 +207,7 @@ const m = {
     } catch (e) {
       console.error(e);
     }
-}, Ke = (t, e) => {
+}, et = (t, e) => {
   const o = {
     400: "Bad Request",
     401: "Unauthorized",
@@ -250,45 +252,45 @@ const m = {
     ...t.errors
   }[e.status];
   if (o)
-    throw new Ce(t, e, o);
+    throw new Te(t, e, o);
   if (!e.ok) {
-    const n = e.status ?? "unknown", r = e.statusText ?? "unknown", a = (() => {
+    const n = e.status ?? "unknown", r = e.statusText ?? "unknown", i = (() => {
       try {
         return JSON.stringify(e.body, null, 2);
       } catch {
         return;
       }
     })();
-    throw new Ce(
+    throw new Te(
       t,
       e,
-      `Generic Error: status: ${n}; status text: ${r}; body: ${a}`
+      `Generic Error: status: ${n}; status text: ${r}; body: ${i}`
     );
   }
-}, d = (t, e) => new Pe(async (s, o, n) => {
+}, d = (t, e) => new He(async (s, o, n) => {
   try {
-    const r = We(t, e), a = je(e), c = He(e), f = await Le(t, e);
+    const r = Ke(t, e), i = ze(e), c = Ye(e), f = await Xe(t, e);
     if (!n.isCancelled) {
-      let h = await Ge(t, e, r, c, a, f, n);
-      for (const De of t.interceptors.response._fns)
-        h = await De(h);
-      const de = await Fe(h), Oe = Ve(h, e.responseHeader);
-      let ue = de;
-      e.responseTransformer && h.ok && (ue = await e.responseTransformer(de));
-      const pe = {
+      let h = await Je(t, e, r, c, i, f, n);
+      for (const We of t.interceptors.response._fns)
+        h = await We(h);
+      const le = await Ze(h), $e = Qe(h, e.responseHeader);
+      let Ce = le;
+      e.responseTransformer && h.ok && (Ce = await e.responseTransformer(le));
+      const ye = {
         url: r,
         ok: h.ok,
         status: h.status,
         statusText: h.statusText,
-        body: Oe ?? ue
+        body: $e ?? Ce
       };
-      Ke(e, pe), s(pe.body);
+      et(e, ye), s(ye.body);
     }
   } catch (r) {
     o(r);
   }
 });
-class y {
+class v {
   /**
    * @param data The data for the request.
    * @param data.id
@@ -565,105 +567,144 @@ class y {
     });
   }
 }
-var u;
-class ze {
-  constructor(e) {
-    T(this, u);
-    b(this, u, e);
+class fe {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns unknown OK
+   * @throws ApiError
+   */
+  static postDocumenttypesettings(e = {}) {
+    return d(m, {
+      method: "POST",
+      url: "/documenttypesettings",
+      body: e.requestBody,
+      mediaType: "application/json",
+      errors: {
+        400: "Bad Request",
+        401: "The resource is protected and requires an authentication token"
+      }
+    });
   }
-  async getCommentsCount() {
-    return await C(i(this, u), y.getCommentsCount());
-  }
-  async getApprovedComments(e) {
-    return await C(i(this, u), y.getCommentsByContentkeyApproved({ contentkey: e }));
-  }
-  async getUnapprovedComments() {
-    return await C(i(this, u), y.getCommentsUnapproved());
-  }
-  async getUnapprovedCommentsCount() {
-    return await C(i(this, u), y.getCommentsUnapprovedCount());
-  }
-  async getTrashedComments() {
-    return await C(i(this, u), y.getCommentsTrashed());
-  }
-  async getTrashedCommentsCount() {
-    return await C(i(this, u), y.getCommentsTrashedCount());
-  }
-  async approveComment(e) {
-    return await C(i(this, u), y.patchCommentsByIdApprove({ id: e }));
-  }
-  async trashComment(e) {
-    return await C(i(this, u), y.patchCommentsByIdTrash({ id: e }));
-  }
-  async restoreComment(e) {
-    return await C(i(this, u), y.patchCommentsByIdRestore({ id: e }));
-  }
-  async deleteComment(e) {
-    return await C(i(this, u), y.deleteCommentsByIdDelete({ id: e }));
+  /**
+   * @param data The data for the request.
+   * @param data.documentType
+   * @returns unknown OK
+   * @throws ApiError
+   */
+  static getDocumenttypesettingsByDocumentType(e) {
+    return d(m, {
+      method: "GET",
+      url: "/documenttypesettings/{documentType}",
+      path: {
+        documentType: e.documentType
+      },
+      errors: {
+        401: "The resource is protected and requires an authentication token",
+        404: "Not Found"
+      }
+    });
   }
 }
-u = new WeakMap();
 var p;
-class Te extends ve {
-  constructor(s) {
-    super(s);
-    T(this, p);
-    b(this, p, new ze(this));
+class tt {
+  constructor(e) {
+    y(this, p);
+    g(this, p, e);
   }
   async getCommentsCount() {
-    return i(this, p).getCommentsCount();
+    return await l(a(this, p), v.getCommentsCount());
   }
-  async getApprovedComments(s) {
-    return i(this, p).getApprovedComments(s);
+  async getApprovedComments(e) {
+    return await l(a(this, p), v.getCommentsByContentkeyApproved({ contentkey: e }));
   }
   async getUnapprovedComments() {
-    return i(this, p).getUnapprovedComments();
+    return await l(a(this, p), v.getCommentsUnapproved());
   }
   async getUnapprovedCommentsCount() {
-    return i(this, p).getUnapprovedCommentsCount();
+    return await l(a(this, p), v.getCommentsUnapprovedCount());
   }
   async getTrashedComments() {
-    return i(this, p).getTrashedComments();
+    return await l(a(this, p), v.getCommentsTrashed());
   }
   async getTrashedCommentsCount() {
-    return i(this, p).getTrashedCommentsCount();
+    return await l(a(this, p), v.getCommentsTrashedCount());
   }
-  async approveComment(s) {
-    return i(this, p).approveComment(s);
+  async approveComment(e) {
+    return await l(a(this, p), v.patchCommentsByIdApprove({ id: e }));
   }
-  async trashComment(s) {
-    return i(this, p).trashComment(s);
+  async trashComment(e) {
+    return await l(a(this, p), v.patchCommentsByIdTrash({ id: e }));
   }
-  async restoreComment(s) {
-    return i(this, p).restoreComment(s);
+  async restoreComment(e) {
+    return await l(a(this, p), v.patchCommentsByIdRestore({ id: e }));
   }
-  async deleteComment(s) {
-    return i(this, p).deleteComment(s);
+  async deleteComment(e) {
+    return await l(a(this, p), v.deleteCommentsByIdDelete({ id: e }));
   }
 }
 p = new WeakMap();
-var Je = Object.defineProperty, Xe = Object.getOwnPropertyDescriptor, be = (t) => {
+var u;
+class Ae extends me {
+  constructor(s) {
+    super(s);
+    y(this, u);
+    g(this, u, new tt(this));
+  }
+  async getCommentsCount() {
+    return a(this, u).getCommentsCount();
+  }
+  async getApprovedComments(s) {
+    return a(this, u).getApprovedComments(s);
+  }
+  async getUnapprovedComments() {
+    return a(this, u).getUnapprovedComments();
+  }
+  async getUnapprovedCommentsCount() {
+    return a(this, u).getUnapprovedCommentsCount();
+  }
+  async getTrashedComments() {
+    return a(this, u).getTrashedComments();
+  }
+  async getTrashedCommentsCount() {
+    return a(this, u).getTrashedCommentsCount();
+  }
+  async approveComment(s) {
+    return a(this, u).approveComment(s);
+  }
+  async trashComment(s) {
+    return a(this, u).trashComment(s);
+  }
+  async restoreComment(s) {
+    return a(this, u).restoreComment(s);
+  }
+  async deleteComment(s) {
+    return a(this, u).deleteComment(s);
+  }
+}
+u = new WeakMap();
+var st = Object.defineProperty, nt = Object.getOwnPropertyDescriptor, Ee = (t) => {
   throw TypeError(t);
-}, W = (t, e, s, o) => {
-  for (var n = o > 1 ? void 0 : o ? Xe(e, s) : e, r = t.length - 1, a; r >= 0; r--)
-    (a = t[r]) && (n = (o ? a(e, s, n) : a(n)) || n);
-  return o && n && Je(e, s, n), n;
-}, we = (t, e, s) => e.has(t) || be("Cannot " + s), L = (t, e, s) => (we(t, e, "read from private field"), e.get(t)), Ye = (t, e, s) => e.has(t) ? be("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), Qe = (t, e, s, o) => (we(t, e, "write to private field"), e.set(t, s), s), w;
-let g = class extends te(se) {
+}, L = (t, e, s, o) => {
+  for (var n = o > 1 ? void 0 : o ? nt(e, s) : e, r = t.length - 1, i; r >= 0; r--)
+    (i = t[r]) && (n = (o ? i(e, s, n) : i(n)) || n);
+  return o && n && st(e, s, n), n;
+}, ke = (t, e, s) => e.has(t) || Ee("Cannot " + s), H = (t, e, s) => (ke(t, e, "read from private field"), e.get(t)), ot = (t, e, s) => e.has(t) ? Ee("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), rt = (t, e, s, o) => (ke(t, e, "write to private field"), e.set(t, s), s), S;
+let b = class extends oe(re) {
   constructor() {
-    super(), Ye(this, w), this.title = "Statistics", Qe(this, w, new Te(this));
+    super(), ot(this, S), this.title = "Statistics", rt(this, S, new Ae(this));
   }
   connectedCallback() {
-    super.connectedCallback(), L(this, w) && (L(this, w).getCommentsCount().then((t) => {
+    super.connectedCallback(), H(this, S) && (H(this, S).getCommentsCount().then((t) => {
       this.commentsCount = t.data;
-    }), L(this, w).getUnapprovedCommentsCount().then((t) => {
+    }), H(this, S).getUnapprovedCommentsCount().then((t) => {
       this.unapprovedCommentsCount = t.data;
-    }), L(this, w).getTrashedCommentsCount().then((t) => {
+    }), H(this, S).getTrashedCommentsCount().then((t) => {
       this.trashedCommentsCount = t.data;
     }));
   }
   render() {
-    return P`
+    return B`
             <umb-body-layout headline=${this.title}>
                 <div class="statistics">
                     <uui-box>
@@ -690,9 +731,9 @@ let g = class extends te(se) {
         `;
   }
 };
-w = /* @__PURE__ */ new WeakMap();
-g.styles = [
-  ne`
+S = /* @__PURE__ */ new WeakMap();
+b.styles = [
+  ae`
 			.statistics {
                 display: grid;
                 grid-gap: 2rem;
@@ -724,27 +765,27 @@ g.styles = [
             }
 		`
 ];
-W([
-  oe()
-], g.prototype, "title", 2);
-W([
-  B()
-], g.prototype, "commentsCount", 2);
-W([
-  B()
-], g.prototype, "unapprovedCommentsCount", 2);
-W([
-  B()
-], g.prototype, "trashedCommentsCount", 2);
-g = W([
-  re("statistics-dashboard")
-], g);
-const Ze = g, et = "uDiscussions.Dashboard.Statistics", tt = [
+L([
+  ie()
+], b.prototype, "title", 2);
+L([
+  q()
+], b.prototype, "commentsCount", 2);
+L([
+  q()
+], b.prototype, "unapprovedCommentsCount", 2);
+L([
+  q()
+], b.prototype, "trashedCommentsCount", 2);
+b = L([
+  ce("statistics-dashboard")
+], b);
+const at = b, it = "uDiscussions.Dashboard.Statistics", ct = [
   {
     type: "dashboard",
     name: "Statistics Dashboard",
-    alias: et,
-    element: Ze,
+    alias: it,
+    element: at,
     weight: -10,
     meta: {
       label: "Statistics",
@@ -753,70 +794,70 @@ const Ze = g, et = "uDiscussions.Dashboard.Statistics", tt = [
     conditions: [
       {
         alias: "Umb.Condition.SectionAlias",
-        match: ae
+        match: de
       }
     ]
   }
-], st = [
-  ...tt
+], mt = [
+  ...ct
 ];
-var l, E, k, R;
-class X extends ve {
+var C, E, k, D;
+class Z extends me {
   constructor(s) {
     super(s);
-    T(this, l);
-    T(this, E);
-    T(this, k);
-    T(this, R);
-    b(this, E, new F([], () => {
-    })), this.approvedComments = i(this, E).asObservable(), b(this, k, new F([], () => {
-    })), this.unapprovedComments = i(this, k).asObservable(), b(this, R, new F([], () => {
-    })), this.trashedComments = i(this, R).asObservable(), this.provideContext(V, this), b(this, l, new Te(this));
+    y(this, C);
+    y(this, E);
+    y(this, k);
+    y(this, D);
+    g(this, E, new X([], () => {
+    })), this.approvedComments = a(this, E).asObservable(), g(this, k, new X([], () => {
+    })), this.unapprovedComments = a(this, k).asObservable(), g(this, D, new X([], () => {
+    })), this.trashedComments = a(this, D).asObservable(), this.provideContext(z, this), g(this, C, new Ae(this));
   }
   async getApprovedComments(s) {
-    const { data: o } = await i(this, l).getApprovedComments(s);
-    o ? i(this, E).setValue(o) : i(this, E).setValue([]);
+    const { data: o } = await a(this, C).getApprovedComments(s);
+    o ? a(this, E).setValue(o) : a(this, E).setValue([]);
   }
   async getUnapprovedComments() {
-    const { data: s } = await i(this, l).getUnapprovedComments();
-    s ? i(this, k).setValue(s) : i(this, k).setValue([]);
+    const { data: s } = await a(this, C).getUnapprovedComments();
+    s ? a(this, k).setValue(s) : a(this, k).setValue([]);
   }
   async getTrashedComments() {
-    const { data: s } = await i(this, l).getTrashedComments();
-    s ? i(this, R).setValue(s) : i(this, R).setValue([]);
+    const { data: s } = await a(this, C).getTrashedComments();
+    s ? a(this, D).setValue(s) : a(this, D).setValue([]);
   }
   async approveComment(s) {
-    return await i(this, l).approveComment(s);
+    return await a(this, C).approveComment(s);
   }
   async trashComment(s) {
-    return await i(this, l).trashComment(s);
+    return await a(this, C).trashComment(s);
   }
   async restoreComment(s) {
-    return await i(this, l).restoreComment(s);
+    return await a(this, C).restoreComment(s);
   }
   async deleteComment(s) {
-    return await i(this, l).deleteComment(s);
+    return await a(this, C).deleteComment(s);
   }
 }
-l = new WeakMap(), E = new WeakMap(), k = new WeakMap(), R = new WeakMap();
-const V = new Ue(X.name), nt = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+C = new WeakMap(), E = new WeakMap(), k = new WeakMap(), D = new WeakMap();
+const z = new Me(Z.name), dt = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  COMMENTS_CONTEXT: V,
-  CommentsContext: X,
-  default: X
+  COMMENTS_CONTEXT: z,
+  CommentsContext: Z,
+  default: Z
 }, Symbol.toStringTag, { value: "Module" }));
-var ot = Object.defineProperty, rt = Object.getOwnPropertyDescriptor, Ae = (t) => {
+var pt = Object.defineProperty, ut = Object.getOwnPropertyDescriptor, De = (t) => {
   throw TypeError(t);
-}, ce = (t, e, s, o) => {
-  for (var n = o > 1 ? void 0 : o ? rt(e, s) : e, r = t.length - 1, a; r >= 0; r--)
-    (a = t[r]) && (n = (o ? a(e, s, n) : a(n)) || n);
-  return o && n && ot(e, s, n), n;
-}, Se = (t, e, s) => e.has(t) || Ae("Cannot " + s), v = (t, e, s) => (Se(t, e, "read from private field"), e.get(t)), D = (t, e, s) => e.has(t) ? Ae("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), z = (t, e, s, o) => (Se(t, e, "write to private field"), e.set(t, s), s), A, $, I, Y, Q;
-let x = class extends te(se) {
+}, ue = (t, e, s, o) => {
+  for (var n = o > 1 ? void 0 : o ? ut(e, s) : e, r = t.length - 1, i; r >= 0; r--)
+    (i = t[r]) && (n = (o ? i(e, s, n) : i(n)) || n);
+  return o && n && pt(e, s, n), n;
+}, Re = (t, e, s) => e.has(t) || De("Cannot " + s), _ = (t, e, s) => (Re(t, e, "read from private field"), e.get(t)), N = (t, e, s) => e.has(t) ? De("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), J = (t, e, s, o) => (Re(t, e, "write to private field"), e.set(t, s), s), w, $, W, ee, te;
+let x = class extends oe(re) {
   constructor() {
-    super(), D(this, A), D(this, $), D(this, I), this.title = "Unapproved comments", D(this, Y, (t) => async () => {
+    super(), N(this, w), N(this, $), N(this, W), this.title = "Unapproved comments", N(this, ee, (t) => async () => {
       var s;
-      const e = (s = v(this, $)) == null ? void 0 : s.open(this, H, {
+      const e = (s = _(this, $)) == null ? void 0 : s.open(this, V, {
         data: {
           headline: "Trash",
           content: "Are you sure you want to move the comment to the Discussions Recycle Bin?",
@@ -826,16 +867,16 @@ let x = class extends te(se) {
       });
       e == null || e.onSubmit().then(async () => {
         var n, r;
-        await ((n = v(this, A)) == null ? void 0 : n.trashComment(t.id)), await this.getUnapprovedComments();
+        await ((n = _(this, w)) == null ? void 0 : n.trashComment(t.id)), await this.getUnapprovedComments();
         const o = {
           headline: "Trashed",
           message: "The comment has been moved to the Discussions Recycle Bin."
         };
-        await ((r = v(this, I)) == null ? void 0 : r.peek("positive", { data: o }));
+        await ((r = _(this, W)) == null ? void 0 : r.peek("positive", { data: o }));
       });
-    }), D(this, Q, (t) => async () => {
+    }), N(this, te, (t) => async () => {
       var s;
-      const e = (s = v(this, $)) == null ? void 0 : s.open(this, H, {
+      const e = (s = _(this, $)) == null ? void 0 : s.open(this, V, {
         data: {
           headline: "Approve",
           content: "Are you sure you want to approve the comment?",
@@ -845,44 +886,44 @@ let x = class extends te(se) {
       });
       e == null || e.onSubmit().then(async () => {
         var n, r;
-        await ((n = v(this, A)) == null ? void 0 : n.approveComment(t.id)), await this.getUnapprovedComments();
+        await ((n = _(this, w)) == null ? void 0 : n.approveComment(t.id)), await this.getUnapprovedComments();
         const o = {
           headline: "Approved",
           message: "The comment has been approved."
         };
-        await ((r = v(this, I)) == null ? void 0 : r.peek("positive", { data: o }));
+        await ((r = _(this, W)) == null ? void 0 : r.peek("positive", { data: o }));
       });
-    }), this.consumeContext(V, (t) => {
-      z(this, A, t), this.observe(t.unapprovedComments, (e) => {
+    }), this.consumeContext(z, (t) => {
+      J(this, w, t), this.observe(t.unapprovedComments, (e) => {
         this.comments = e;
       });
-    }), this.consumeContext(_e, (t) => {
-      z(this, $, t);
-    }), this.consumeContext(fe, (t) => {
-      z(this, I, t);
+    }), this.consumeContext(be, (t) => {
+      J(this, $, t);
+    }), this.consumeContext(Se, (t) => {
+      J(this, W, t);
     });
   }
   connectedCallback() {
-    super.connectedCallback(), v(this, A) != null && this.getUnapprovedComments();
+    super.connectedCallback(), _(this, w) != null && this.getUnapprovedComments();
   }
   async getUnapprovedComments() {
     var t;
-    await ((t = v(this, A)) == null ? void 0 : t.getUnapprovedComments());
+    await ((t = _(this, w)) == null ? void 0 : t.getUnapprovedComments());
   }
   render() {
     var t;
-    return P`
+    return B`
             <umb-body-layout headline='Unapproved Comments'>
                 <div class="comments">
-                    ${(t = this.comments) == null ? void 0 : t.map((e) => P`
+                    ${(t = this.comments) == null ? void 0 : t.map((e) => B`
                             <uui-box>
                                 <div slot="headline">${e.author}</div>
                                 <div slot="header">${e.date}</div>
                                 <div slot="header-actions">
-                                    <uui-button pristine label="Delete" look="primary" color="danger" @click=${v(this, Y).call(this, e)}>
+                                    <uui-button pristine label="Delete" look="primary" color="danger" @click=${_(this, ee).call(this, e)}>
                                         <uui-icon name="delete"></uui-icon>
                                     </uui-button>
-                                    <uui-button pristine label="Approve" look="primary" color="positive" @click=${v(this, Q).call(this, e)}>
+                                    <uui-button pristine label="Approve" look="primary" color="positive" @click=${_(this, te).call(this, e)}>
                                         Approve
                                     </uui-button>
                                 </div>
@@ -897,13 +938,13 @@ let x = class extends te(se) {
         `;
   }
 };
-A = /* @__PURE__ */ new WeakMap();
+w = /* @__PURE__ */ new WeakMap();
 $ = /* @__PURE__ */ new WeakMap();
-I = /* @__PURE__ */ new WeakMap();
-Y = /* @__PURE__ */ new WeakMap();
-Q = /* @__PURE__ */ new WeakMap();
+W = /* @__PURE__ */ new WeakMap();
+ee = /* @__PURE__ */ new WeakMap();
+te = /* @__PURE__ */ new WeakMap();
 x.styles = [
-  ne`
+  ae`
             .comments {
                 display: grid;
                 grid-gap: 2rem;
@@ -925,28 +966,28 @@ x.styles = [
             }
         `
 ];
-ce([
-  oe()
+ue([
+  ie()
 ], x.prototype, "title", 2);
-ce([
-  B()
+ue([
+  q()
 ], x.prototype, "comments", 2);
-x = ce([
-  re("unapprovedcomments-workspace-root")
+x = ue([
+  ce("unapprovedcomments-workspace-root")
 ], x);
-const at = x;
-var it = Object.defineProperty, ct = Object.getOwnPropertyDescriptor, Ee = (t) => {
+const ht = x;
+var lt = Object.defineProperty, Ct = Object.getOwnPropertyDescriptor, Oe = (t) => {
   throw TypeError(t);
-}, me = (t, e, s, o) => {
-  for (var n = o > 1 ? void 0 : o ? ct(e, s) : e, r = t.length - 1, a; r >= 0; r--)
-    (a = t[r]) && (n = (o ? a(e, s, n) : a(n)) || n);
-  return o && n && it(e, s, n), n;
-}, ke = (t, e, s) => e.has(t) || Ee("Cannot " + s), _ = (t, e, s) => (ke(t, e, "read from private field"), e.get(t)), U = (t, e, s) => e.has(t) ? Ee("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), J = (t, e, s, o) => (ke(t, e, "write to private field"), e.set(t, s), s), S, N, M, Z, ee;
-let O = class extends te(se) {
+}, he = (t, e, s, o) => {
+  for (var n = o > 1 ? void 0 : o ? Ct(e, s) : e, r = t.length - 1, i; r >= 0; r--)
+    (i = t[r]) && (n = (o ? i(e, s, n) : i(n)) || n);
+  return o && n && lt(e, s, n), n;
+}, xe = (t, e, s) => e.has(t) || Oe("Cannot " + s), T = (t, e, s) => (xe(t, e, "read from private field"), e.get(t)), I = (t, e, s) => e.has(t) ? Oe("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, s), Q = (t, e, s, o) => (xe(t, e, "write to private field"), e.set(t, s), s), A, M, P, se, ne;
+let U = class extends oe(re) {
   constructor() {
-    super(), U(this, S), U(this, N), U(this, M), this.title = "Recycle Bin", U(this, Z, (t) => async () => {
+    super(), I(this, A), I(this, M), I(this, P), this.title = "Recycle Bin", I(this, se, (t) => async () => {
       var s;
-      const e = (s = _(this, N)) == null ? void 0 : s.open(this, H, {
+      const e = (s = T(this, M)) == null ? void 0 : s.open(this, V, {
         data: {
           headline: "Delete",
           content: "Are you sure you want to delete the comment?",
@@ -956,16 +997,16 @@ let O = class extends te(se) {
       });
       e == null || e.onSubmit().then(async () => {
         var n, r;
-        await ((n = _(this, S)) == null ? void 0 : n.deleteComment(t.id)), await this.getTrashedComments();
+        await ((n = T(this, A)) == null ? void 0 : n.deleteComment(t.id)), await this.getTrashedComments();
         const o = {
           headline: "Deleted",
           message: "The comment has been deleted."
         };
-        await ((r = _(this, M)) == null ? void 0 : r.peek("positive", { data: o }));
+        await ((r = T(this, P)) == null ? void 0 : r.peek("positive", { data: o }));
       });
-    }), U(this, ee, (t) => async () => {
+    }), I(this, ne, (t) => async () => {
       var s;
-      const e = (s = _(this, N)) == null ? void 0 : s.open(this, H, {
+      const e = (s = T(this, M)) == null ? void 0 : s.open(this, V, {
         data: {
           headline: "Restore",
           content: "Are you sure you want to restore the comment to <strong>" + (t.approved ? "Approved Comments" : "Unapproved Comments") + "</strong>?",
@@ -975,44 +1016,44 @@ let O = class extends te(se) {
       });
       e == null || e.onSubmit().then(async () => {
         var n, r;
-        await ((n = _(this, S)) == null ? void 0 : n.restoreComment(t.id)), await this.getTrashedComments();
+        await ((n = T(this, A)) == null ? void 0 : n.restoreComment(t.id)), await this.getTrashedComments();
         const o = {
           headline: "Restored",
           message: "The comment has been restored."
         };
-        await ((r = _(this, M)) == null ? void 0 : r.peek("positive", { data: o }));
+        await ((r = T(this, P)) == null ? void 0 : r.peek("positive", { data: o }));
       });
-    }), this.consumeContext(V, (t) => {
-      J(this, S, t), this.observe(t.trashedComments, (e) => {
+    }), this.consumeContext(z, (t) => {
+      Q(this, A, t), this.observe(t.trashedComments, (e) => {
         this.comments = e;
       });
-    }), this.consumeContext(_e, (t) => {
-      J(this, N, t);
-    }), this.consumeContext(fe, (t) => {
-      J(this, M, t);
+    }), this.consumeContext(be, (t) => {
+      Q(this, M, t);
+    }), this.consumeContext(Se, (t) => {
+      Q(this, P, t);
     });
   }
   connectedCallback() {
-    super.connectedCallback(), _(this, S) != null && this.getTrashedComments();
+    super.connectedCallback(), T(this, A) != null && this.getTrashedComments();
   }
   async getTrashedComments() {
     var t;
-    await ((t = _(this, S)) == null ? void 0 : t.getTrashedComments());
+    await ((t = T(this, A)) == null ? void 0 : t.getTrashedComments());
   }
   render() {
     var t;
-    return P`
+    return B`
             <umb-body-layout headline=${this.title}>
                 <div class="comments">
-                    ${(t = this.comments) == null ? void 0 : t.map((e) => P`
+                    ${(t = this.comments) == null ? void 0 : t.map((e) => B`
                             <uui-box>
                                 <div slot="headline">${e.author}</div>
                                 <div slot="header">${e.date}</div>
                                 <div slot="header-actions">
-                                    <uui-button pristine label="Delete" look="primary" color="danger" @click=${_(this, Z).call(this, e)}>
+                                    <uui-button pristine label="Delete" look="primary" color="danger" @click=${T(this, se).call(this, e)}>
                                         <uui-icon name="delete"></uui-icon>
                                     </uui-button>
-                                    <uui-button pristine label="Restore" look="primary" color="default" @click=${_(this, ee).call(this, e)}>
+                                    <uui-button pristine label="Restore" look="primary" color="default" @click=${T(this, ne).call(this, e)}>
                                         Restore
                                     </uui-button>
                                 </div>
@@ -1028,13 +1069,13 @@ let O = class extends te(se) {
         `;
   }
 };
-S = /* @__PURE__ */ new WeakMap();
-N = /* @__PURE__ */ new WeakMap();
+A = /* @__PURE__ */ new WeakMap();
 M = /* @__PURE__ */ new WeakMap();
-Z = /* @__PURE__ */ new WeakMap();
-ee = /* @__PURE__ */ new WeakMap();
-O.styles = [
-  ne`
+P = /* @__PURE__ */ new WeakMap();
+se = /* @__PURE__ */ new WeakMap();
+ne = /* @__PURE__ */ new WeakMap();
+U.styles = [
+  ae`
             .comments {
                 display: grid;
                 grid-gap: 2rem;
@@ -1056,41 +1097,96 @@ O.styles = [
             }
         `
 ];
-me([
-  oe()
-], O.prototype, "title", 2);
-me([
-  B()
-], O.prototype, "comments", 2);
-O = me([
-  re("trashedcomments-workspace-root")
-], O);
-const mt = O, dt = "ApprovedComments.Workspace.Alias", ut = "UnapprovedComments.Workspace.Alias", Re = "unapproved-comments", pt = "TrashedComments.Workspace.Alias", xe = "trashed-comments", ht = [
+he([
+  ie()
+], U.prototype, "title", 2);
+he([
+  q()
+], U.prototype, "comments", 2);
+U = he([
+  ce("trashedcomments-workspace-root")
+], U);
+const yt = U;
+var R;
+class vt {
+  constructor(e) {
+    y(this, R);
+    g(this, R, e);
+  }
+  async getDocumentTypeSettings(e) {
+    return await l(a(this, R), fe.getDocumenttypesettingsByDocumentType({ documentType: e }));
+  }
+  async setDocumentTypeSettings(e) {
+    return await l(a(this, R), fe.postDocumenttypesettings({ requestBody: e }));
+  }
+}
+R = new WeakMap();
+var O;
+class _t extends me {
+  constructor(s) {
+    super(s);
+    y(this, O);
+    g(this, O, new vt(this));
+  }
+  async getDocumentTypeSettings(s) {
+    return a(this, O).getDocumentTypeSettings(s);
+  }
+  async setDocumentTypeSettings(s) {
+    return a(this, O).setDocumentTypeSettings(s);
+  }
+}
+O = new WeakMap();
+var K;
+class Tt extends Pe {
+  constructor(s, o) {
+    super(s, o);
+    y(this, K, new _t(this));
+    this.consumeContext(Be, (n) => {
+      n.contentTypeUnique.subscribe((r) => {
+        r && a(this, K).getDocumentTypeSettings(r).then((i) => {
+          var c;
+          this.permitted = ((c = i.data) == null ? void 0 : c.commentsEnabled) ?? !1;
+        });
+      });
+    });
+  }
+}
+K = new WeakMap();
+const Ue = "Workspace.Comments.Enabled.Condition.Alias", gt = [
+  {
+    type: "condition",
+    alias: Ue,
+    name: "Workspace Comments Enabled Condition Context",
+    api: Tt
+  }
+], ft = [
+  ...gt
+], bt = "DocumentType.Settings.Workspace.Alias", Yt = "documenttype-settings", St = "ApprovedComments.Workspace.Alias", wt = "UnapprovedComments.Workspace.Alias", Ne = "unapproved-comments", At = "TrashedComments.Workspace.Alias", Ie = "trashed-comments", Et = [
   {
     type: "workspace",
-    alias: ut,
+    alias: wt,
     name: "Unapproved Comments Workspace",
-    element: at,
+    element: ht,
     meta: {
-      entityType: Re
+      entityType: Ne
     }
   },
   {
     type: "workspace",
-    alias: pt,
+    alias: At,
     name: "Trashed Comments Workspace",
-    element: mt,
+    element: yt,
     meta: {
-      entityType: xe
+      entityType: Ie
     }
   }
 ];
-var lt = [
+var kt = [
   {
     type: "workspaceView",
-    alias: dt,
+    alias: St,
     name: "Approved Comments Workspace",
-    js: () => import("./approvedcomments.element-D-X28bSs.js"),
+    js: () => import("./approvedcomments.element-UODdcqeB.js"),
     weight: 10,
     meta: {
       icon: "icon-chat",
@@ -1101,30 +1197,77 @@ var lt = [
       {
         alias: "Umb.Condition.WorkspaceAlias",
         match: "Umb.Workspace.Document"
+      },
+      {
+        alias: Ue
+      }
+    ]
+  },
+  {
+    type: "workspaceView",
+    alias: bt,
+    name: "DocumentType Settings Workspace",
+    js: () => import("./documenttypesettings.element-CpUk9MJN.js"),
+    weight: 10,
+    meta: {
+      icon: "icon-chat",
+      pathname: "comments",
+      label: "Comments"
+    },
+    conditions: [
+      {
+        alias: "Umb.Condition.WorkspaceAlias",
+        match: "Umb.Workspace.DocumentType"
       }
     ]
   }
 ];
-const Ct = [
+const Dt = [
   {
     type: "workspaceContext",
-    alias: "UnapprovedComments.Workspace.context",
+    alias: "UnapprovedComments.Workspace.Context",
     name: "Unapproved Comments Workspace Context",
-    js: () => import("./unapprovedcomments.context-BFAfbaj2.js")
+    js: () => import("./unapprovedcomments.context-CoJvWY_k.js")
   },
   {
     type: "workspaceContext",
-    alias: "TrashedComments.Workspace.context",
+    alias: "TrashedComments.Workspace.Context",
     name: "Trashed Comments Workspace Context",
-    js: () => import("./trashedcomments.context-Djokizs8.js")
+    js: () => import("./trashedcomments.context-CFkBdvgy.js")
+  },
+  {
+    type: "workspaceContext",
+    alias: "DocumentType.Settings.Workspace.Context",
+    name: "DocumentType Settings Workspace Context",
+    js: () => import("./documenttypesettings.context-GaBIPoHK.js")
   }
-], yt = [], vt = [], _t = [
-  ...ht,
-  ...lt,
-  ...Ct,
-  ...yt,
-  ...vt
-], G = "uDiscussions.Menu.Comments", ft = [
+], Rt = [
+  {
+    type: "workspaceAction",
+    kind: "default",
+    alias: "DocumentType.Settings.Workspace.Action.Save",
+    name: "DocumentType Settings Workspace Action Save",
+    js: () => import("./savedocumentaction-apJsNJzU.js"),
+    overwrites: "Umb.WorkspaceAction.DocumentType.Save",
+    meta: {
+      look: "primary",
+      color: "positive",
+      label: "#buttons_save"
+    },
+    conditions: [
+      {
+        alias: "Umb.Condition.WorkspaceAlias",
+        match: "Umb.Workspace.DocumentType"
+      }
+    ]
+  }
+], Ot = [], xt = [
+  ...Et,
+  ...kt,
+  ...Dt,
+  ...Rt,
+  ...Ot
+], F = "uDiscussions.Menu.Comments", Ut = [
   {
     type: "sectionSidebarApp",
     kind: "menuWithEntityActions",
@@ -1132,25 +1275,25 @@ const Ct = [
     name: "Discussions Sidebar Comments",
     meta: {
       label: "Comments",
-      menu: G
+      menu: F
     },
     conditions: [
       {
         alias: "Umb.Condition.SectionAlias",
-        match: ae
+        match: de
       }
     ]
   }
-], gt = [
+], Nt = [
   {
     type: "menu",
-    alias: G,
+    alias: F,
     name: "Menu Comments",
     meta: {
       label: "Comments"
     }
   }
-], Tt = [
+], It = [
   {
     type: "menuItem",
     alias: "uDiscussions.MenuItem.Comments.UnapprovedComments",
@@ -1158,9 +1301,9 @@ const Ct = [
     meta: {
       label: "Unapproved Comments",
       icon: "icon-chat",
-      entityType: Re,
+      entityType: Ne,
       menus: [
-        G
+        F
       ]
     }
   },
@@ -1171,43 +1314,47 @@ const Ct = [
     meta: {
       label: "Recycle Bin",
       icon: "icon-remove",
-      entityType: xe,
+      entityType: Ie,
       menus: [
-        G
+        F
       ]
     }
   }
-], bt = [
-  ...ft,
-  ...gt,
-  ...Tt
-], wt = [
+], $t = [
+  ...Ut,
+  ...Nt,
+  ...It
+], Wt = [
   {
     type: "globalContext",
     alias: "Comments.Context",
     name: "Comments Context",
-    js: () => Promise.resolve().then(() => nt)
+    js: () => Promise.resolve().then(() => dt)
   }
-], At = [
-  ...wt
-], Nt = (t, e) => {
+], Mt = [
+  ...Wt
+], Jt = (t, e) => {
   e.registerMany([
-    ...At,
-    ...Ne,
-    ...st,
-    ...bt,
-    ..._t
-  ]), t.consumeContext($e, (s) => {
+    ...Mt,
+    ...Le,
+    ...mt,
+    ...$t,
+    ...xt,
+    ...ft
+  ]), t.consumeContext(qe, (s) => {
     const o = s.getOpenApiConfiguration();
     m.TOKEN = o.token, m.BASE = o.base, m.WITH_CREDENTIALS = o.withCredentials;
   });
 };
 export {
-  V as C,
-  pt as T,
-  ut as U,
-  Re as a,
-  xe as b,
-  Nt as o
+  z as C,
+  bt as D,
+  At as T,
+  wt as U,
+  Ne as a,
+  Ie as b,
+  _t as c,
+  Yt as d,
+  Jt as o
 };
-//# sourceMappingURL=index-DDlCX0jV.js.map
+//# sourceMappingURL=index-CXh1neh-.js.map

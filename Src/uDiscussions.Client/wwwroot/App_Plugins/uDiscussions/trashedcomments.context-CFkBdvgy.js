@@ -1,20 +1,20 @@
 import { UmbControllerBase as e } from "@umbraco-cms/backoffice/class-api";
 import { UmbContextToken as o } from "@umbraco-cms/backoffice/context-api";
-import { U as r, a as s } from "./index-DDlCX0jV.js";
+import { T as r, b as s } from "./index-CXh1neh-.js";
 class n extends e {
   constructor(t) {
-    super(t), this.workspaceAlias = r, this.provideContext(a, this);
+    super(t), this.workspaceAlias = r, this.provideContext(T, this);
   }
   getEntityType() {
     return s;
   }
 }
-const a = new o(
+const T = new o(
   n.name
 );
 export {
-  n as UnapprovedCommentsWorkspaceContext,
-  a as WORKSPACE_CONTEXT,
+  n as TrashedCommentsWorkspaceContext,
+  T as WORKSPACE_CONTEXT,
   n as default
 };
-//# sourceMappingURL=unapprovedcomments.context-BFAfbaj2.js.map
+//# sourceMappingURL=trashedcomments.context-CFkBdvgy.js.map

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using uDiscussions.Core.Services;
-using uDiscussions.Core.Services.Implementation;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 
@@ -12,6 +11,7 @@ namespace uDiscussions.Core.Composers
         {
             builder.Services.AddTransient<ICommentService, CommentService>();
             builder.Services.AddTransient<ILikeService, LikeService>();
+            builder.Services.AddTransient<IDocumentTypeSettingsService, DocumentTypeSettingsService>();
         }
     }
 }
