@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+	<PackageId>uDiscussions.Client</PackageId>
+	<Title>uDiscussions.Client</Title>
+	<Description>Package containing the client logic for uDiscussions.</Description>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageTags>umbraco plugin package</PackageTags>
+	<RootNamespace>uDiscussions.Client</RootNamespace>
+	<PackageProjectUrl>https://github.com/koenvanras/uDiscussions</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/koenvanras/uDiscussions</RepositoryUrl>
+	<Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="15.3.1" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="15.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\uDiscussions.Core\uDiscussions.Core.csproj" />
+  </ItemGroup>
+
+</Project>
