@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v4.2.1
         with:
-          name: packages
+          name: uDiscussions-${{ github.event.inputs.package_version }}
           path: ${{ env.OUTPUT }}
       
       - name: Setup .NET
